@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Results</title>
+    <link rel="stylesheet" href="result.css">
+  </head>
+  <body>
+    <div class="result">
+      <h2>Submitted Information</h2>
+      <label><p>Name: </p><span><%=user.name%></span></label>
+      <label><p>Dojo Location: </p><span><%=user.location%></span></label>
+      <label><p>Language: </p><span><%=user.language%></span></label>
+      <label><p>Comment: </p><span><%=user.comment%></span></label>
+      <form action="/">
+        <input type="submit" name="" value="Go Back">
+      </form>
+    </div>
+  </body>
+</html>

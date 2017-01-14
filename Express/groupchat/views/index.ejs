@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chatroom</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+      $(document).ready(function (){
+        var socket = io.connect();
+        var current_user;
+        var login = function(){
+          var name = prompt('The page at https://localhost says:\nYour name:')
+          socket.emit('got_a_new_user', {user: name});
+        }
+
+        login();
+
+        $('form').submit(function(){
+          socket.emit('new_message', {message: $('.message').val(), user:current_user})
+          return false;
+        })
+        socket.on('existing_user', function(data){
+          $('.error').html(data.error)
+          login();
+        })
+        socket.on('load_messages', function(data){
+          $('.error').html("")
+          current_user = data.current_user;
+          var messages = data.messages
+          var thread = ""
+          for(var i = 0; i < messages.length; i++){
+            thread += "<p>" + messages[i].name + ": " + messages[i].message + "</p>";
+          }
+          $('.message_board').append(thread);
+        })
+        socket.on('post_message', function(data){
+          $('.message_board').append("<p>" + data.user + ": " + data.message + "</p>")
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <div class="error"></div>
+    <h1>Conversation Board</h1>
+    <div class="message_board"></div>
+    <form class="new_message">
+      <input type="text" class="message">
+      <input type="submit" value="Send">
+    </form>
+  </body>
+</html>

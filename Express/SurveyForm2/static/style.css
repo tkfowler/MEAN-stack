@@ -1,0 +1,35 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  padding-top: 10px;
+}
+.survey{
+  margin: 0 auto;
+  padding: 5px;
+  width: 350px;
+  border: 1px solid black;
+}
+label{
+  display: block;
+  margin: 5px 5px;
+  position: relative;
+}
+
+.input, select{
+  position: absolute;
+  left: 50%;
+  width: 150px;
+}
+.button{
+  left: 85%;
+  position: relative;
+}
+
+.message, .number{
+  margin: 0 auto;
+  padding: 5px;
+  width: 350px;
+  background-color: #ABEBC6;
+}
