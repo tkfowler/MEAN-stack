@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dog</title>
+  </head>
+  <body>
+    <h1><%=dog.name%> is a <%=dog.breed%> that is <%=dog.age%> year(s) old!</h1>
+    <a href="/">Go Back</a>
+    <a href="/dogs/edit/<%=dog._id%>">Edit dogs info</a>
+    <form action="/dogs/destroy/<%=dog._id%>" method="post">
+      <input type="submit" value="Delete">
+    </form>
+  </body>
+</html>

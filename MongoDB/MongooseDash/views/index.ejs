@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dog Dashboard</title>
+  </head>
+  <body>
+    <h1>Dogs!</h1><a href="/dogs/new">Add new dog</a>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Breed</th>
+        <th>Age</th>
+      </tr>
+      <% for (var x in dogs) { %>
+        <tr>
+          <td><%=dogs[x].name%></td>
+          <td><%=dogs[x].breed%></td>
+          <td><%=dogs[x].age%></td>
+          <td><a href="/dogs/<%=dogs[x]._id%>">View More..</a></td>
+        </tr>
+      <% } %>
+    </table>
+  </body>
+</html>
