@@ -41,9 +41,16 @@ app.get('/', function(req, res){
 
 app.post('/post', function(req, res){
   var post = new Post(req.body);
-  post.save(function(err){
-    if(err){
-      res.render('index', {title: 'you have errors!', errors: post.errors})
+  post.save(function(error){
+    if(error){
+      Post.find({}).populate('comments').exec(function(err, posts){
+        if(err){
+          res.render('index', {errors: err});
+        }else{
+          res.render('index', {posts: posts, errors: post.errors})
+        }
+      })
+      // res.render('index', {title: 'you have errors!', errors: post.errors})
     }else{
       res.redirect('/');
     }
