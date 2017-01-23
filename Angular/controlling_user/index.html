@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src='node_modules/angular/angular.js'></script>
+    <script type='text/javascript'>
+      var app = angular.module('myApp', []);
+      app.controller('usersController', ['$scope', function($scope){
+        $scope.sortType = '';
+        $scope.sortReverse = false;
+        $scope.users = [];
+        $scope.addUser = function(){
+          $scope.newUser.date = new Date();
+          $scope.users.push($scope.newUser);
+          $scope.newUser = {};
+        }
+        $scope.delete = function(val){
+          $scope.users.splice(val, 1);
+        }
+      }])
+    </script>
+  </head>
+  <body ng-controller='usersController'>
+    <h1>Users Controller</h1>
+    <form>
+      First Name <input type="text" ng-model='newUser.first_name'>
+      Last Name <input type="text" ng-model='newUser.last_name'>
+      Favorite Language <input type="text" ng-model='newUser.language'>
+      <input type="submit" name="" value="Create User" ng-click='addUser()'>
+    </form>
+    <br>
+    <input type="text" ng-model="user_search">
+    <table>
+      <tr>
+        <th><a href="#" ng-click="sortType = 'first_name'; sortReverse = !sortReverse">First Name</a></th>
+        <th><a href="#" ng-click="sortType = 'last_name'; sortReverse = !sortReverse">Last Name</a></th>
+        <th><a href="#" ng-click="sortType = 'language'; sortReverse = !sortReverse">Favorite Language</a></th>
+        <th><a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">Date Added</a></th>
+        <th>Action</th>
+      </tr>
+      <div "filter: user_search">
+        <tr ng-repeat="user in users | filter: user_search | orderBy:sortType:sortReverse track by $index">
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.language }}</td>
+          <td>{{ user.date | date:'MM-dd-yyyy'}}</td>
+          <td><button ng-click='delete($index)'>Delete User</button></td>
+        </tr>
+      </div>
+    </table>
+  </body>
+</html>

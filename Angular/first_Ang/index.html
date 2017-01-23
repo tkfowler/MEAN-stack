@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>First Angular Page</title>
+    <script src="node_modules/angular/angular.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var app = angular.module('app', []);
+      app.controller('divController', ['$scope', function($scope){
+        $scope.myName = 'Tommy';
+        $scope.myFavoriteLanguage = 'JavaScript';
+        $scope.myFavoriteJSLibrary = 'Angular'
+      }])
+    </script>
+  </head>
+  <body>
+    <div ng-controller = 'divController'>
+      <p>{{ myName }}</p>
+      <p>{{ myFavoriteLanguage }}</p>
+      <p>{{ myFavoriteJSLibrary }}</p>
+    </div>
+  </body>
+</html>

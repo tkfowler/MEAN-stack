@@ -1,0 +1,23 @@
+<div ng-controller='associationsController'>
+  <form ng-submit='create()'>
+    <select ng-model='association.idx' ng-init='association.idx = 0'>
+      <option ng-repeat='player in players' value={{$index}} ng-bind='player.name'></option>
+    </select>
+    <select ng-model='association.team' ng-init='association.team = teams[0].name'>
+      <option ng-repeat='team in teams' value={{team.name}} ng-bind='team.name'></option>
+    </select>
+    <input type="submit" value="Assign Player to Team">
+  </form>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Team</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat='association in players'>
+      <td>{{association.name}}</td>
+      <td>{{association.team}}</td>
+      <td><button ng-click='delete(association)'>Clear Assignment</button></td>
+    </tr>
+  </table>
+</div>

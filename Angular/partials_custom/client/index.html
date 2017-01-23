@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Customize User</title>
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var app = angular.module('myApp', ['ngRoute'])
+      app.factory('userFactory', ['$http', function($http){
+        var users = [
+          {first_name: 'Yukihiro', last_name:'Matsumoto', language: 'Ruby'},
+          {first_name: 'Ryan', last_name:'Dahl', language: 'Javascript'},
+          {first_name: 'Brendan', last_name:'Eich', language: 'Javascript'}];
+        var factory = {};
+        factory.index = function(callback){
+          callback(users)
+        }
+        factory.create = function(user, callback){
+          users.push(user);
+          callback(users);
+        }
+        factory.delete = function(user, callback){
+          users.splice(users.indexOf(user), 1);
+          callback(users);
+        }
+        factory.show = function(index, callback){
+          callback(users)
+        }
+        return factory;
+      }]);
+
+      app.controller('CustomizeUsersController', ['$scope', 'userFactory', '$location', function($scope, userFactory, $location){
+        $scope.sortType = '';
+        $scope.sortReverse = false;
+        function setUsers(data){
+          $scope.users = data;
+          $scope.user = {};
+        }
+        $scope.index = function(){
+          userFactory.index(setUsers);
+        }();
+
+        $scope.create = function(){
+          userFactory.create($scope.user, setUsers)
+          $location.url('/list')
+        }
+        $scope.delete = function(user){
+          userFactory.delete(user, setUsers)
+        }
+      }])
+
+      app.controller('UserListsController', ['$scope', 'userFactory', function($scope, userFactory){
+        $scope.sortType = '';
+        $scope.sortReverse = false;
+        function setUsers(data){
+          $scope.users = data;
+        }
+        $scope.index = function(){
+          userFactory.index(setUsers);
+        }();
+      }])
+
+      app.config(function($routeProvider){
+        $routeProvider
+          .when('/users', {
+            templateUrl: 'partials/customizeUsers.html'
+          })
+          .when('/list', {
+            templateUrl: 'partials/userList.html'
+          })
+          .otherwise({
+            redirectTo: '/users'
+          })
+      })
+    </script>
+  </head>
+  <body>
+    <a href="#!/users">Customize Users</a> <a href="#!/list">User List</a>
+    <div ng-view=""></div>
+  </body>
+</html>
