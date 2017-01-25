@@ -4,8 +4,9 @@ app.controller('indexController', ['$scope','friendsFactory', '$location', '$rou
       $scope.friends = returnedData;
       $scope.friend = {}
     });
-  }();
-
+  };
+  index();
+  
   $scope.new = function(){
     $location.url('/new')
   }
