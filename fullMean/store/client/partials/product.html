@@ -1,0 +1,20 @@
+<div class="newProduct" style="display: inline-block; vertical-align: top;">
+  <input type="text" placeholder="search..." ng-model='product_filter'>
+
+  <p><b><u>Add a new product</u></b></p>
+  <form ng-submit='create()'>
+    Name: <input type="text" style="display: block;" ng-model='product.name' >
+    Image(url): <input type="text" style="display: block;" ng-model='product.image' >
+    Description: <textarea rows="5" cols="20" style="display: block;" ng-model='product.description' ></textarea>
+    Initial Quantity: <input type="number" style="display: block;" ng-model='product.quantity' >
+    <input type="submit" value="Create">
+  </form>
+</div>
+<div class="products" style="display: inline-block; vertical-align: top; width: 750px">
+  <div style="height:100px; width:150px; display:inline-block;text-align: center;"ng-repeat='product in products | limitTo: displayNum'>
+    <img style="height:100px; width:100px;" src={{product.image}} alt="{{product.name}} pic">
+    <br>{{product.name}}
+    <br>({{product.quantity}} left)
+  </div>
+  <a href ng-click='showMore(15)' style = "display: block; text-align: center;">show more...</a>
+</div>

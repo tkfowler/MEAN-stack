@@ -1,0 +1,22 @@
+<h1>Add a new customer</h1>
+<div ng-repeat='error in errors' ng-if='errors'>
+  <b>{{error.message}}</b>
+</div>
+<form ng-submit='create()'>
+  Customer Name: <input type="text" ng-model='customer.name'>
+  <input type="submit" name="" value="Add">
+</form>
+<hr>
+<input type="text" placeholder="search name..." ng-model='customer_filter'>
+<table>
+  <tr>
+    <th>Customer Name</th>
+    <th>Created Date</th>
+    <th>Action</th>
+  </tr>
+  <tr ng-repeat='customer in customers | filter: customer_filter'>
+    <td>{{customer.name}}</td>
+    <td>{{customer.createdAt | date: "longDate"}}</td>
+    <td><button type="button" ng-click='delete(customer._id)'>Remove</button></td>
+  </tr>
+</table>

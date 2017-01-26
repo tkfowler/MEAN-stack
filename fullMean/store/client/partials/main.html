@@ -1,0 +1,26 @@
+<div class="products">
+  <div class="newProduct" style="display: inline-block; vertical-align: top;">
+    <input type="text" placeholder="search..." ng-model='product_filter'>
+  </div>
+  <div style="height:100px; width:150px; display:inline-block; text-align:center;"ng-repeat='product in products | filter: product_filter | limitTo: 5'>
+    <img style="height:100px; width:100px;" src="{{product.image}}" alt="{{product.name}} pic">
+    <br>{{product.name}}
+    <br>({{product.quantity}} left)
+  </div>
+  <a style = "display: block; text-align: center;" href="#!/products">show more...</a>
+</div>
+<div class="orders">
+  <h3><u>Recent Orders</u></h3>
+  <div ng-repeat='order in orders | limitTo: 3'>
+    {{order.customer}} purchased {{order.quantity}} {{order.product}}...({{order.createdAt}} ago)
+  </div>
+  <a style = "display: block; text-align: center;" href="#!/orders">show more...</a>
+</div>
+<div class="customers">
+  <h3><u>New Customers</u></h3>
+  <div ng-repeat='customer in customers | limitTo: -3'>
+    {{customer.name}} joined the store. ({{customer.createdAt}} ago)
+  </div>
+  <a style = "display: block; text-align: center;" href="#!/customers">show more...</a>
+</div>
+{{now}}
