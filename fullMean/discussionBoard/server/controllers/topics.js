@@ -53,23 +53,5 @@ function TopicsController(){
       }
     })
   };
-  // this.update = function(req,res){
-  //   User.update({_id: req.params.id}, req.body, function(err, users){
-  //     if(err){
-  //       res.json(err);
-  //     }else{
-  //       res.json(users);
-  //     }
-  //   })
-  // };
-  // this.delete = function(req,res){
-  //   User.remove({_id:req.params.id}, function(err, users){
-  //     if(err){
-  //       res.json(err)
-  //     }else{
-  //       res.json(users);
-  //     }
-  //   })
-  // };
 }
 module.exports = new TopicsController(); // what does this export?
